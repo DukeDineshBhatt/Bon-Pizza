@@ -1,0 +1,455 @@
+{
+  "project_info": {
+    "project_number": "723362617491",
+    "firebase_url": "https://bigboss-9deb1.firebaseio.com",
+    "project_id": "bigboss-9deb1",
+    "storage_bucket": "bigboss-9deb1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723362617491:android:40bf0f1836be1e63565566",
+        "android_client_info": {
+          "package_name": "com.technuoma.roshni"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMPZpJp5CUBraCP_H6FHQ2imp-iBym_hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "723362617491-gfuktjhp5rg79undr0sgc15vtjljf1l6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nsezconnect"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723362617491:android:a33c432455302918",
+        "android_client_info": {
+          "package_name": "com.technuoma.bonpizza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723362617491-k3uobllmp8176goi6v1l6st251un1hco.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.technuoma.bonpizza",
+            "certificate_hash": "93f555d2b34ca486dcfcd2b7f2ad9f13e89bf194"
+          }
+        },
+        {
+          "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMPZpJp5CUBraCP_H6FHQ2imp-iBym_hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "723362617491-gfuktjhp5rg79undr0sgc15vtjljf1l6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nsezconnect"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723362617491:android:4dda4309c882de40565566",
+        "android_client_info": {
+          "package_name": "com.technuoma.bonpizza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723362617491-lo2bmds9fihbimr8thu2pnen83fbbrc6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.technuoma.bonpizza",
+            "certificate_hash": "e0a3918e80b3e325a982e1286d4d1de8ab02f915"
+          }
+        },
+        {
+          "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMPZpJp5CUBraCP_H6FHQ2imp-iBym_hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "723362617491-gfuktjhp5rg79undr0sgc15vtjljf1l6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nsezconnect"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723362617491:android:1e441f72306c8911565566",
+        "android_client_info": {
+          "package_name": "com.technuoma.bonpizza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723362617491-lav6hpvkl267rrb4iplntsqaml5t3hmd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.technuoma.bonpizza",
+            "certificate_hash": "ccddf5fe438e61fd600262d7b39d4af46defab0c"
+          }
+        },
+        {
+          "client_id": "723362617491-qcg2ks80or8icnh9q0um1lbkqmotvnhv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.technuoma.bonpizza",
+            "certificate_hash": "dc960c8018572a0b5eefa006e7a77b26d910523a"
+          }
+        },
+        {
+          "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMPZpJp5CUBraCP_H6FHQ2imp-iBym_hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "723362617491-gfuktjhp5rg79undr0sgc15vtjljf1l6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nsezconnect"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723362617491:android:e4a82a09a0bdfc50565566",
+        "android_client_info": {
+          "package_name": "com.technuoma.bonpizza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723362617491-la060cghs7htcth6f20spjo6sv5jonf2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.technuoma.bonpizza",
+            "certificate_hash": "ccddf5fe438e61fd600262d7b39d4af46defab0c"
+          }
+        },
+        {
+          "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMPZpJp5CUBraCP_H6FHQ2imp-iBym_hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "723362617491-gfuktjhp5rg79undr0sgc15vtjljf1l6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nsezconnect"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723362617491:android:30f16ee59dd00c1e565566",
+        "android_client_info": {
+          "package_name": "com.technuoma.bonpizza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723362617491-o2shu0ipi5r5bsr0o50qkp0rcecdcai4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.technuoma.bonpizza",
+            "certificate_hash": "ccddf5fe438e61fd600262d7b39d4af46defab0c"
+          }
+        },
+        {
+          "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMPZpJp5CUBraCP_H6FHQ2imp-iBym_hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "723362617491-gfuktjhp5rg79undr0sgc15vtjljf1l6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nsezconnect"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723362617491:android:4107a4252c1c4225",
+        "android_client_info": {
+          "package_name": "com.technuoma.bonpizza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMPZpJp5CUBraCP_H6FHQ2imp-iBym_hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "723362617491-gfuktjhp5rg79undr0sgc15vtjljf1l6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nsezconnect"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723362617491:android:5419c6ddba638a07",
+        "android_client_info": {
+          "package_name": "com.technuoma.bonpizza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMPZpJp5CUBraCP_H6FHQ2imp-iBym_hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "723362617491-gfuktjhp5rg79undr0sgc15vtjljf1l6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nsezconnect"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723362617491:android:8ab243d51e6b524b565566",
+        "android_client_info": {
+          "package_name": "com.technuoma.bonpizza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMPZpJp5CUBraCP_H6FHQ2imp-iBym_hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "723362617491-gfuktjhp5rg79undr0sgc15vtjljf1l6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nsezconnect"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723362617491:android:b989a212c091d85e565566",
+        "android_client_info": {
+          "package_name": "com.technuoma.bonpizza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMPZpJp5CUBraCP_H6FHQ2imp-iBym_hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "723362617491-gfuktjhp5rg79undr0sgc15vtjljf1l6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nsezconnect"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723362617491:android:2fbcdc9f5ee9eb23565566",
+        "android_client_info": {
+          "package_name": "com.technuoma.bonpizza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMPZpJp5CUBraCP_H6FHQ2imp-iBym_hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723362617491-fhcuki724n6h2mfnn7slo6vcul0jc19o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "723362617491-gfuktjhp5rg79undr0sgc15vtjljf1l6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nsezconnect"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
