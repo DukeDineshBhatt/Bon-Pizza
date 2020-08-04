@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
-    android:layout_width="125dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="4dp">
 
@@ -14,38 +14,40 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="125dp"
+            android:layout_height="match_parent"
             android:layout_margin="8dp"
             android:background="@drawable/rectanglebg"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_centerInParent="true"
                 android:layout_margin="1dp"
+                android:scaleType="centerInside"
                 android:src="@drawable/chicken">
 
             </ImageView>
 
 
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_margin="3dp"
-                android:src="@drawable/veg"></ImageView>
+                android:src="@drawable/veg"/>
 
         </RelativeLayout>
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="VEGGIE SUPREME"
+            android:gravity="center"
             android:textColor="#000"
-            android:textSize="11sp"
-            android:textStyle="bold"></TextView>
+            android:textSize="16sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/size"
@@ -53,8 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Size: Regular"
-            android:textColor="#A6A4A4"
-            android:textSize="10sp"></TextView>
+            android:textColor="#A6A4A4"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -68,10 +69,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="8dp"
-                android:drawableLeft="@drawable/ic_baseline_attach_money_24"
                 android:text="6.00 "
-                android:textColor="@color/colorPrimary"
-                android:textSize="10sp"></TextView>
+                android:textColor="@color/colorPrimary"/>
 
             <TextView
                 android:id="@+id/discount"
@@ -79,8 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="8dp"
-                android:textSize="10sp"></TextView>
+                android:layout_marginBottom="8dp"/>
 
         </LinearLayout>
 

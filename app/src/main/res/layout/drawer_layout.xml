@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/colorAccent" />
+        app:srcCompat="@color/colorPrimary" />
 
 <!--    <TextView
         android:id="@+id/rewards"
@@ -75,6 +75,7 @@
             android:drawableStart="@drawable/ic_wallet"
             android:drawablePadding="22dp"
             android:id="@+id/wallet"
+            android:visibility="gone"
             />
 
 
