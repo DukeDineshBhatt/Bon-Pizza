@@ -6,205 +6,94 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/shade"
-    tools:context=".MainActivity"
-    tools:openDrawer="start">
+    tools:context=".MainActivity">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-
-            <LinearLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
-                android:orientation="vertical">
+                android:background="@color/colorPrimary"
+                android:elevation="4dp"
+                android:minHeight="?attr/actionBarSize">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:elevation="4dp"
-                    android:minHeight="?attr/actionBarSize">
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="18dp">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Delivery Location"
-                                android:textColor="#ffffff"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:id="@+id/location"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#ffffff"
-                                android:textSize="16sp" />
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:gravity="end"
-                            android:orientation="horizontal">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="end"
-                                android:layout_marginEnd="18dp">
-
-                                <ImageButton
-                                    android:id="@+id/imageButton3"
-                                    android:layout_width="22dp"
-                                    android:layout_height="22dp"
-                                    android:background="@drawable/ic_shopping_bag"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <TextView
-                                    android:id="@+id/count"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_alignParentTop="true"
-                                    android:background="@drawable/accent_round"
-                                    android:gravity="center"
-                                    android:padding="3dp"
-                                    android:text="0"
-                                    android:textColor="#fff"
-                                    android:textSize="8sp"
-                                    app:layout_constraintBottom_toTopOf="@+id/imageButton3"
-                                    app:layout_constraintEnd_toEndOf="@+id/imageButton3"
-                                    app:layout_constraintStart_toEndOf="@+id/imageButton3"
-                                    app:layout_constraintTop_toTopOf="@+id/imageButton3" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                        </LinearLayout>
-                    </RelativeLayout>
-
-
-                </androidx.appcompat.widget.Toolbar>
-
-
-            </LinearLayout>
-
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <com.santalu.autoviewpager.AutoViewPager
-                        android:id="@+id/viewPager"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        app:avp_autoScroll="true"
-                        app:avp_duration="2000"
-                        app:avp_indeterminate="true"
+                    <ImageButton
+                        android:id="@+id/imageButton3"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:background="@drawable/ic_shopping_bag"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/category"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:nestedScrollingEnabled="false"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="4dp" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        app:cardCornerRadius="3dp">
-
-                        <ImageView
-                            android:id="@+id/banner1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitXY" />
-
-                    </androidx.cardview.widget.CardView>
-
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Deal of the Day"
-                        android:textSize="18sp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:textColor="#000"/>
+                        android:id="@+id/count"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/accent_round"
+                        android:gravity="center"
+                        android:padding="3dp"
+                        android:text="0"
+                        android:textColor="#fff"
+                        android:textSize="8sp"
+                        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
+                        app:layout_constraintEnd_toEndOf="@+id/imageButton3"
+                        app:layout_constraintStart_toEndOf="@+id/imageButton3"
+                        app:layout_constraintTop_toTopOf="@+id/imageButton3" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/deal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:nestedScrollingEnabled="false"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="4dp"/>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/banner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:nestedScrollingEnabled="false"
-                        android:paddingStart="4dp"
-                        android:paddingEnd="4dp"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
 
-            </androidx.core.widget.NestedScrollView>
-        </LinearLayout>
 
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
+        </RelativeLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone" />
+            android:background="@color/white"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_navigation_main" />
 
-    </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/replace"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
         layout="@layout/drawer_layout"
