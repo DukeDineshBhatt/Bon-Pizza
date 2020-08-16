@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -273,24 +274,22 @@ public class Home extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-                   /* FragmentManager fm4 = mainActivity.getSupportFragmentManager();
+                    FragmentManager fm4 = mainActivity.getSupportFragmentManager();
 
                     for (int i = 0; i < fm4.getBackStackEntryCount(); ++i) {
                         fm4.popBackStack();
                     }
 
                     FragmentTransaction ft4 = fm4.beginTransaction();
-                    SubCat frag14 = new SubCat();
+                    productList frag14 = new productList();
                     Bundle b = new Bundle();
                     b.putString("id", item.getId());
-                    b.putString("title", item.getName());
-                    b.putString("image", item.getImage());
                     frag14.setArguments(b);
                     ft4.replace(R.id.replace, frag14);
                     ft4.addToBackStack(null);
                     //ft.addToBackStack(null);
                     ft4.commit();
-*/
+
 
                 }
             });

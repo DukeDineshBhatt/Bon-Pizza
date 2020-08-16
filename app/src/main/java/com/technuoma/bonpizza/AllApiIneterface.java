@@ -4,6 +4,7 @@ package com.technuoma.bonpizza;
 import com.technuoma.bonpizza.cartPOJO.cartBean;
 import com.technuoma.bonpizza.homePOJO.homeBean;
 import com.technuoma.bonpizza.ordersPOJO.ordersBean;
+import com.technuoma.bonpizza.productsPOJO.productsBean;
 import com.technuoma.bonpizza.seingleProductPOJO.singleProductBean;
 
 import retrofit2.Call;
@@ -50,6 +51,19 @@ public interface AllApiIneterface {
     @POST("pizza/api/deleteCart.php")
     Call<singleProductBean> deleteCart(
             @Part("id") String id
+    );
+
+    @Multipart
+    @POST("pizza/api/getProducts.php")
+    Call<productsBean> getProducts(
+            @Part("subcat2") String cat,
+            @Part("location_id") String location_id
+    );
+
+    @Multipart
+    @POST("pizza/api/getProductById.php")
+    Call<singleProductBean> getProductById(
+            @Part("id") String cat
     );
 
     /*@Multipart
