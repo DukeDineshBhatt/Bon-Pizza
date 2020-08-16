@@ -125,7 +125,7 @@
                     <com.santalu.autoviewpager.AutoViewPager
                         android:id="@+id/viewPager"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
+                        android:layout_height="200dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
@@ -179,7 +179,8 @@
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="4dp"
                         android:nestedScrollingEnabled="false"
-                        android:paddingStart="4dp" />
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/banner"
@@ -187,7 +188,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:nestedScrollingEnabled="false"
-                        android:paddingStart="4dp" />
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp"/>
 
 
                 </LinearLayout>

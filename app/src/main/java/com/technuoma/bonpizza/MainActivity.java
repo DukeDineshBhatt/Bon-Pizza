@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        list = new ArrayList<>();
         list3 = new ArrayList<>();
         list4 = new ArrayList<>();
         toolbar = findViewById(R.id.toolbar);
@@ -192,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
                         BannerAdapter adapter1 = new BannerAdapter(getSupportFragmentManager(), response.body().getPbanner());
                         pager.setAdapter(adapter1);
 
-                        adapter3.setData(response.body().getToday());
+                        adapter3.setData(response.body().getBest());
                         adapter6.setData(response.body().getCat());
                         //adapter4.setData(response.body().getBest());
 
@@ -390,10 +391,36 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
             holder.setIsRecyclable(false);
 
-            holder.discount.setText(Html.fromHtml("  </b></font><strike>\u0024" + String.valueOf(8.00) + " 40% off" + "</strike>"));
+            final Best item = list.get(position);
 
-            // final Best item = list.get(position);
+            DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
+            ImageLoader loader = ImageLoader.getInstance();
+            loader.displayImage(item.getImage(), holder.image, options);
 
+            holder.name.setText(item.getName());
+
+            float dis = Float.parseFloat(item.getDiscount());
+
+            final String nv1;
+
+            if (dis > 0) {
+
+                float pri = Float.parseFloat(item.getPrice());
+                float dv = (dis / 100) * pri;
+
+                float nv = pri - dv;
+
+                nv1 = String.valueOf(nv);
+
+                holder.price.setText(Html.fromHtml("\u20B9 " + String.valueOf(nv)));
+                holder.discount.setText(Html.fromHtml("<strike>\u20B9 " + item.getPrice() + "</strike>"));
+                holder.discount.setVisibility(View.VISIBLE);
+            } else {
+
+                nv1 = item.getPrice();
+                holder.price.setText("\u20B9 " + item.getPrice());
+                holder.discount.setVisibility(View.GONE);
+            }
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -412,27 +439,24 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
         @Override
         public int getItemCount() {
-            return 6;
+            return list.size();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
 
             ImageView image;
-            TextView price, title, discount, stock, newamount, size;
+            TextView price, name, size, discount;
             Button add;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
 
-                discount = itemView.findViewById(R.id.discount);
 
-             /*   price = itemView.findViewById(R.id.textView11);
-                title = itemView.findViewById(R.id.textView12);
-                discount = itemView.findViewById(R.id.textView10);
-                add = itemView.findViewById(R.id.button5);
-                stock = itemView.findViewById(R.id.textView63);
-                newamount = itemView.findViewById(R.id.textView6);
-                size = itemView.findViewById(R.id.textView7);*/
+                price = itemView.findViewById(R.id.rate);
+                image = itemView.findViewById(R.id.image);
+                name = itemView.findViewById(R.id.name);
+                size = itemView.findViewById(R.id.size);
+                discount = itemView.findViewById(R.id.discount);
 
 
             }
