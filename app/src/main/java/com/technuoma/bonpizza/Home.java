@@ -578,7 +578,7 @@ public class Home extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    /*if (cid != null) {
+                    if (cid != null) {
                         FragmentManager fm4 = mainActivity.getSupportFragmentManager();
 
                         for (int i = 0; i < fm4.getBackStackEntryCount(); ++i) {
@@ -586,7 +586,7 @@ public class Home extends Fragment {
                         }
 
                         FragmentTransaction ft4 = fm4.beginTransaction();
-                        SubCat frag14 = new SubCat();
+                        productList frag14 = new productList();
                         Bundle b = new Bundle();
                         b.putString("id", cid);
                         b.putString("title", tit);
@@ -596,7 +596,7 @@ public class Home extends Fragment {
                         ft4.addToBackStack(null);
                         //ft.addToBackStack(null);
                         ft4.commit();
-                    }*/
+                    }
 
 
                 }
