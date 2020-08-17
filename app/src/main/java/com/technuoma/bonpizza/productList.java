@@ -28,6 +28,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.technuoma.bonpizza.productsPOJO.Datum;
 import com.technuoma.bonpizza.productsPOJO.productsBean;
+import com.technuoma.bonpizza.seingleProductPOJO.singleProductBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -203,7 +204,7 @@ public class productList extends Fragment {
                 }
             });
 
-            /*final String finalNv = nv1;
+            final String finalNv = nv1;
             holder.add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -294,7 +295,7 @@ public class productList extends Fragment {
                     }
 
                 }
-            });*/
+            });
 
         }
 
@@ -316,6 +317,7 @@ public class productList extends Fragment {
                 image = itemView.findViewById(R.id.image);
                 name = itemView.findViewById(R.id.name);
                 size = itemView.findViewById(R.id.size);
+                add = itemView.findViewById(R.id.add);
                 discount = itemView.findViewById(R.id.discount);
 
             }

@@ -3,6 +3,8 @@ package com.technuoma.bonpizza;
 
 import com.technuoma.bonpizza.addressPOJO.addressBean;
 import com.technuoma.bonpizza.cartPOJO.cartBean;
+import com.technuoma.bonpizza.checkPromoPOJO.checkPromoBean;
+import com.technuoma.bonpizza.checkoutPOJO.checkoutBean;
 import com.technuoma.bonpizza.homePOJO.homeBean;
 import com.technuoma.bonpizza.ordersPOJO.ordersBean;
 import com.technuoma.bonpizza.productsPOJO.productsBean;
@@ -94,5 +96,43 @@ public interface AllApiIneterface {
             @Part("id") String id
     );
 
+    @Multipart
+    @POST("pizza/api/addCart.php")
+    Call<singleProductBean> addCart(
+            @Part("user_id") String user_id,
+            @Part("product_id") String product_id,
+            @Part("quantity") String quantity,
+            @Part("unit_price") String unit_price,
+            @Part("version") String version
+    );
+
+    @Multipart
+    @POST("pizza/api/checkPromo.php")
+    Call<checkPromoBean> checkPromo(
+            @Part("promo") String promo,
+            @Part("user_id") String user_id
+    );
+
+
+    @Multipart
+    @POST("pizza/api/buyVouchers.php")
+    Call<checkoutBean> buyVouchers(
+            @Part("user_id") String user_id,
+            @Part("lat") String lat,
+            @Part("lng") String lng,
+            @Part("amount") String amount,
+            @Part("txn") String txn,
+            @Part("name") String name,
+            @Part("address") String address,
+            @Part("pay_mode") String pay_mode,
+            @Part("slot") String slot,
+            @Part("date") String date,
+            @Part("promo") String promo,
+            @Part("house") String house,
+            @Part("area") String area,
+            @Part("city") String city,
+            @Part("pin") String pin,
+            @Part("isnew") String isnew
+    );
 
 }

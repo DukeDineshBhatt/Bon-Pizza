@@ -85,6 +85,7 @@
             android:layout_height="wrap_content"
             android:text="ADD TO CART"
             android:minHeight="0dp"
+            android:id="@+id/add"
             android:textColor="#ffffff"
             android:paddingTop="5dp"
             android:layout_marginTop="10dp"

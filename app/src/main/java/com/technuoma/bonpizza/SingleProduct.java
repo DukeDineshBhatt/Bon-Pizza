@@ -39,22 +39,23 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class SingleProduct extends Fragment {
 
     ImageView image;
-    TextView discount , title , price;
+    TextView discount, title, price;
     Button add;
-    TextView brand , unit , seller;
-    TextView description , key_features , packaging , life , disclaimer , stock;
+    TextView brand, unit, seller;
+    TextView description, key_features, packaging, life, disclaimer, stock;
     ProgressBar progress;
 
-    String id , name;
+    String id, name;
 
-    String pid , nv1;
+    String pid, nv1;
 
     MainActivity mainActivity;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_single_product , container , false);
-        mainActivity = (MainActivity)getActivity();
+        View view = inflater.inflate(R.layout.activity_single_product, container, false);
+        mainActivity = (MainActivity) getActivity();
         id = getArguments().getString("id");
         name = getArguments().getString("title");
 
@@ -75,18 +76,15 @@ public class SingleProduct extends Fragment {
         stock = view.findViewById(R.id.stock);
 
 
-
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                if (pid.length() > 0)
-                {
+                if (pid.length() > 0) {
                     String uid = SharePreferenceUtils.getInstance().getString("userId");
 
-                    if (uid.length() > 0)
-                    {
+                    if (uid.length() > 0) {
 
                         final Dialog dialog = new Dialog(mainActivity);
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -94,10 +92,9 @@ public class SingleProduct extends Fragment {
                         dialog.setContentView(R.layout.add_cart_dialog);
                         dialog.show();
 
-                        final StepperTouch stepperTouch  = dialog.findViewById(R.id.stepperTouch);
+                        final StepperTouch stepperTouch = dialog.findViewById(R.id.stepperTouch);
                         Button add = dialog.findViewById(R.id.button8);
                         final ProgressBar progressBar = dialog.findViewById(R.id.progressBar2);
-
 
 
                         stepperTouch.setMinValue(1);
@@ -105,7 +102,7 @@ public class SingleProduct extends Fragment {
                         stepperTouch.setSideTapEnabled(true);
                         stepperTouch.setCount(1);
 
-                        /*add.setOnClickListener(new View.OnClickListener() {
+                        add.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
 
@@ -128,22 +125,21 @@ public class SingleProduct extends Fragment {
                                         .build();
                                 AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-                                Log.d("userid" , SharePreferenceUtils.getInstance().getString("userid"));
-                                Log.d("pid" , pid);
-                                Log.d("quantity" , String.valueOf(stepperTouch.getCount()));
-                                Log.d("price" , nv1);
+                                Log.d("userid", SharePreferenceUtils.getInstance().getString("userid"));
+                                Log.d("pid", pid);
+                                Log.d("quantity", String.valueOf(stepperTouch.getCount()));
+                                Log.d("price", nv1);
 
                                 int versionCode = BuildConfig.VERSION_CODE;
                                 String versionName = BuildConfig.VERSION_NAME;
 
-                                Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId") , pid , String.valueOf(stepperTouch.getCount()), nv1 , versionName);
+                                Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), pid, String.valueOf(stepperTouch.getCount()), nv1, versionName);
 
                                 call.enqueue(new Callback<singleProductBean>() {
                                     @Override
                                     public void onResponse(Call<singleProductBean> call, Response<singleProductBean> response) {
 
-                                        if (response.body().getStatus().equals("1"))
-                                        {
+                                        if (response.body().getStatus().equals("1")) {
                                             mainActivity.loadCart();
                                             dialog.dismiss();
                                         }
@@ -162,18 +158,15 @@ public class SingleProduct extends Fragment {
 
 
                             }
-                        });*/
+                        });
 
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(mainActivity, "Please login to continue", Toast.LENGTH_SHORT).show();
                         //Intent intent = new Intent(mainActivity , Login.class);
                         //startActivity(intent);
 
                     }
                 }
-
 
 
             }
@@ -211,23 +204,21 @@ public class SingleProduct extends Fragment {
             public void onResponse(Call<singleProductBean> call, Response<singleProductBean> response) {
 
 
-                if (response.body().getStatus().equals("1"))
-                {
+                if (response.body().getStatus().equals("1")) {
                     Data item = response.body().getData();
 
                     pid = item.getId();
 
                     DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
                     ImageLoader loader = ImageLoader.getInstance();
-                    loader.displayImage(item.getImage() , image , options);
+                    loader.displayImage(item.getImage(), image, options);
 
                     float dis = Float.parseFloat(item.getDiscount());
 
-                    if (dis > 0)
-                    {
+                    if (dis > 0) {
 
                         float pri = Float.parseFloat(item.getPrice());
-                        float dv = (dis / 100 ) * pri;
+                        float dv = (dis / 100) * pri;
 
                         float nv = pri - dv;
 
@@ -236,9 +227,7 @@ public class SingleProduct extends Fragment {
                         discount.setVisibility(View.VISIBLE);
                         discount.setText(item.getDiscount() + "% OFF");
                         price.setText(Html.fromHtml("<font color=\"#000000\"><b>\u20B9 " + String.valueOf(nv) + " </b></font><strike>\u20B9 " + item.getPrice() + "</strike>"));
-                    }
-                    else
-                    {
+                    } else {
 
                         nv1 = item.getPrice();
                         discount.setVisibility(View.GONE);
@@ -258,19 +247,7 @@ public class SingleProduct extends Fragment {
                     life.setText(item.getShelfLife());
                     disclaimer.setText(item.getDisclaimer());
 
-
-
-                    if (item.getStock().equals("In stock"))
-                    {
-                        add.setEnabled(true);
-                    }
-                    else
-                    {
-                        add.setEnabled(false);
-                    }
-
                     stock.setText(item.getStock());
-
 
 
                 }

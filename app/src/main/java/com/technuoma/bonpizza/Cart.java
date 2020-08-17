@@ -104,6 +104,7 @@ public class Cart extends Fragment {
 
                         if (response.body().getStatus().equals("1")) {
                             mainActivity.navigation.setSelectedItemId(R.id.action_home);
+                            mainActivity.loadCart();
                         }
 
                         Toast.makeText(mainActivity, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -128,9 +129,9 @@ public class Cart extends Fragment {
 
                 if (amm > 0)
                 {
-                    /*Intent intent = new Intent(mainActivity , Checkout.class);
+                    Intent intent = new Intent(mainActivity , Checkout.class);
                     intent.putExtra("amount" , String.valueOf(amm));
-                    startActivity(intent);*/
+                    startActivity(intent);
                 }
                 else
                 {
@@ -283,6 +284,7 @@ public class Cart extends Fragment {
 
                                 if (response.body().getStatus().equals("1")) {
                                     loadCart();
+                                    mainActivity.loadCart();
                                 }
 
                                 Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -338,6 +340,7 @@ public class Cart extends Fragment {
 
                                 if (response.body().getStatus().equals("1")) {
                                     loadCart();
+                                    mainActivity.loadCart();
                                 }
 
                                 Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -390,6 +393,7 @@ public class Cart extends Fragment {
 
                             if (response.body().getStatus().equals("1")) {
                                 loadCart();
+                                mainActivity.loadCart();
                             }
 
                             Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
