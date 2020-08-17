@@ -381,10 +381,17 @@ public class Home extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-                  /*  Intent intent = new Intent(context, SingleProduct.class);
-                    intent.putExtra("id", item.getId());
-                    intent.putExtra("title", item.getName());
-                    context.startActivity(intent);*/
+                    FragmentManager fm4 = mainActivity.getSupportFragmentManager();
+
+                    FragmentTransaction ft4 = fm4.beginTransaction();
+                    SingleProduct frag14 = new SingleProduct();
+                    Bundle b = new Bundle();
+                    b.putString("id", item.getId());
+                    b.putString("title", item.getName());
+                    frag14.setArguments(b);
+                    ft4.replace(R.id.replace, frag14);
+                    ft4.addToBackStack(null);
+                    ft4.commit();
 
                 }
             });
