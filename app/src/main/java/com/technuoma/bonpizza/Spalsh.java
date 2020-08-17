@@ -116,7 +116,7 @@ public class Spalsh extends AppCompatActivity implements InstallReferrerStateLis
             @Override
             public void run() {
 
-               /* if (id.length() > 0) {
+                if (id.length() > 0) {
                     Intent intent = new Intent(Spalsh.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -124,11 +124,11 @@ public class Spalsh extends AppCompatActivity implements InstallReferrerStateLis
                     Intent intent = new Intent(Spalsh.this, Login.class);
                     startActivity(intent);
                     finish();
-                }*/
+                }
 
-                Intent intent = new Intent(Spalsh.this, MainActivity.class);
+                /*Intent intent = new Intent(Spalsh.this, MainActivity.class);
                 startActivity(intent);
-                finish();
+                finish();*/
             }
         }, 1200);
 

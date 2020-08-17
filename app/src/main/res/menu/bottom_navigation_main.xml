@@ -4,19 +4,19 @@
     <item
         android:id="@+id/action_home"
         android:enabled="true"
-        android:icon="@drawable/back"
+        android:icon="@drawable/ic_home"
         android:title="Home"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_order"
         android:enabled="true"
-        android:icon="@drawable/back"
+        android:icon="@drawable/ic_layout"
         android:title="Orders"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_cart"
         android:enabled="true"
-        android:icon="@drawable/back"
+        android:icon="@drawable/ic_commerce_and_shopping"
         android:title="Cart"
         app:showAsAction="always" />
 </menu>
