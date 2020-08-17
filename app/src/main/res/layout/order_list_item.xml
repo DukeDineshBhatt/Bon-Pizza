@@ -136,6 +136,7 @@
             android:layout_marginTop="8dp"
             android:text="Delivery Date"
             android:textColor="#000000"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
@@ -144,6 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/textView40"
             app:layout_constraintTop_toTopOf="@+id/textView41" />
 
@@ -155,6 +157,7 @@
             android:layout_marginTop="8dp"
             android:text="Delivery Slot"
             android:textColor="#000000"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
@@ -164,6 +167,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="TextView"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/textView42"
             app:layout_constraintTop_toBottomOf="@+id/textView42" />
     </androidx.constraintlayout.widget.ConstraintLayout>

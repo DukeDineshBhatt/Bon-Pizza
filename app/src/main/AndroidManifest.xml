@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Checkout"></activity>
+        <activity android:name=".OrderDetails"></activity>
+        <activity android:name=".Checkout" />
         <activity android:name=".Address" />
         <activity android:name=".Web" />
         <activity android:name=".OTP" />

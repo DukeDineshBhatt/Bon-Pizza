@@ -6,6 +6,7 @@ import com.technuoma.bonpizza.cartPOJO.cartBean;
 import com.technuoma.bonpizza.checkPromoPOJO.checkPromoBean;
 import com.technuoma.bonpizza.checkoutPOJO.checkoutBean;
 import com.technuoma.bonpizza.homePOJO.homeBean;
+import com.technuoma.bonpizza.orderDetailsPOJO.orderDetailsBean;
 import com.technuoma.bonpizza.ordersPOJO.ordersBean;
 import com.technuoma.bonpizza.productsPOJO.productsBean;
 import com.technuoma.bonpizza.seingleProductPOJO.singleProductBean;
@@ -133,6 +134,12 @@ public interface AllApiIneterface {
             @Part("city") String city,
             @Part("pin") String pin,
             @Part("isnew") String isnew
+    );
+
+    @Multipart
+    @POST("pizza/api/getOrderDetails.php")
+    Call<orderDetailsBean> getOrderDetails(
+            @Part("order_id") String order_id
     );
 
 }
