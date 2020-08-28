@@ -480,7 +480,7 @@ public class Home extends Fragment {
                                 TextUtils.join(",", aons);
                                 Log.d("addons", TextUtils.join(",", aons));
 
-                                Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), item.getId(), String.valueOf(stepperTouch.getCount()), nv1, versionName, TextUtils.join(",", aons));
+                                Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), item.getId(), String.valueOf(stepperTouch.getCount()), nv1, versionName, TextUtils.join(", ", aons));
 
                                 call.enqueue(new Callback<singleProductBean>() {
                                     @Override

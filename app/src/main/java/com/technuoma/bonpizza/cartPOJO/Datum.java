@@ -28,6 +28,9 @@ public class Datum {
     @SerializedName("created")
     @Expose
     private String created;
+    @SerializedName("addon")
+    @Expose
+    private String addon;
 
     public String getPid() {
         return pid;
@@ -91,5 +94,13 @@ public class Datum {
 
     public void setCreated(String created) {
         this.created = created;
+    }
+
+    public String getAddon() {
+        return addon;
+    }
+
+    public void setAddon(String addon) {
+        this.addon = addon;
     }
 }
