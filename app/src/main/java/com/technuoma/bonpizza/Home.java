@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -374,7 +376,7 @@ public class Home extends Fragment {
 
                 nv1 = String.valueOf(nv);
 
-                holder.price.setText(Html.fromHtml("\u20B9 " + String.valueOf(nv)));
+                holder.price.setText(Html.fromHtml("\u20B9 " + nv));
                 holder.discount.setText(Html.fromHtml("<strike>\u20B9 " + item.getPrice() + "</strike>"));
                 holder.discount.setVisibility(View.VISIBLE);
             } else {
@@ -383,6 +385,8 @@ public class Home extends Fragment {
                 holder.price.setText("\u20B9 " + item.getPrice());
                 holder.discount.setVisibility(View.GONE);
             }
+
+            holder.size.setText(item.getSize());
 
             holder.add.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -401,7 +405,31 @@ public class Home extends Fragment {
                         final StepperTouch stepperTouch = dialog.findViewById(R.id.stepperTouch);
                         Button add = dialog.findViewById(R.id.button8);
                         final ProgressBar progressBar = dialog.findViewById(R.id.progressBar2);
+                        final TextView name = dialog.findViewById(R.id.name);
+                        final TextView size = dialog.findViewById(R.id.size);
+                        final TextView rate = dialog.findViewById(R.id.rate);
+                        final TextView discount = dialog.findViewById(R.id.discount);
+                        final CheckBox toppings = dialog.findViewById(R.id.checkBox);
+                        final CheckBox sauce = dialog.findViewById(R.id.checkBox2);
 
+                        name.setText(item.getName());
+                        size.setText(item.getSize());
+
+                        if (dis > 0) {
+
+                            float pri = Float.parseFloat(item.getPrice());
+                            float dv = (dis / 100) * pri;
+
+                            float nv = pri - dv;
+
+                            rate.setText(Html.fromHtml("\u20B9 " + nv));
+                            discount.setText(Html.fromHtml("<strike>\u20B9 " + item.getPrice() + "</strike>"));
+                            discount.setVisibility(View.VISIBLE);
+                        } else {
+
+                            rate.setText("\u20B9 " + item.getPrice());
+                            discount.setVisibility(View.GONE);
+                        }
 
                         stepperTouch.setMinValue(1);
                         stepperTouch.setMaxValue(99);
@@ -439,7 +467,20 @@ public class Home extends Fragment {
                                 int versionCode = com.nostra13.universalimageloader.BuildConfig.VERSION_CODE;
                                 String versionName = BuildConfig.VERSION_NAME;
 
-                                Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), item.getId(), String.valueOf(stepperTouch.getCount()), nv1, versionName);
+                                List<String> aons = new ArrayList<>();
+
+                                if (toppings.isChecked()) {
+                                    aons.add("Extra Toppings");
+                                }
+
+                                if (sauce.isChecked()) {
+                                    aons.add("Deep Sauce");
+                                }
+
+                                TextUtils.join(",", aons);
+                                Log.d("addons", TextUtils.join(",", aons));
+
+                                Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), item.getId(), String.valueOf(stepperTouch.getCount()), nv1, versionName, TextUtils.join(",", aons));
 
                                 call.enqueue(new Callback<singleProductBean>() {
                                     @Override

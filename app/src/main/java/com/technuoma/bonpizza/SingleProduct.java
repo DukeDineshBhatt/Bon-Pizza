@@ -4,12 +4,14 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,6 +26,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.technuoma.bonpizza.seingleProductPOJO.Data;
 import com.technuoma.bonpizza.seingleProductPOJO.singleProductBean;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import nl.dionsegijn.steppertouch.StepperTouch;
@@ -75,102 +79,6 @@ public class SingleProduct extends Fragment {
         progress = view.findViewById(R.id.progress);
         stock = view.findViewById(R.id.stock);
 
-
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                if (pid.length() > 0) {
-                    String uid = SharePreferenceUtils.getInstance().getString("userId");
-
-                    if (uid.length() > 0) {
-
-                        final Dialog dialog = new Dialog(mainActivity);
-                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        dialog.setCancelable(true);
-                        dialog.setContentView(R.layout.add_cart_dialog);
-                        dialog.show();
-
-                        final StepperTouch stepperTouch = dialog.findViewById(R.id.stepperTouch);
-                        Button add = dialog.findViewById(R.id.button8);
-                        final ProgressBar progressBar = dialog.findViewById(R.id.progressBar2);
-
-
-                        stepperTouch.setMinValue(1);
-                        stepperTouch.setMaxValue(99);
-                        stepperTouch.setSideTapEnabled(true);
-                        stepperTouch.setCount(1);
-
-                        add.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-
-                                progressBar.setVisibility(View.VISIBLE);
-
-                                Bean b = (Bean) mainActivity.getApplicationContext();
-
-
-                                HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-                                logging.level(HttpLoggingInterceptor.Level.HEADERS);
-                                logging.level(HttpLoggingInterceptor.Level.BODY);
-
-                                OkHttpClient client = new OkHttpClient.Builder().writeTimeout(1000, TimeUnit.SECONDS).readTimeout(1000, TimeUnit.SECONDS).connectTimeout(1000, TimeUnit.SECONDS).addInterceptor(logging).build();
-
-                                Retrofit retrofit = new Retrofit.Builder()
-                                        .baseUrl(b.baseurl)
-                                        .client(client)
-                                        .addConverterFactory(ScalarsConverterFactory.create())
-                                        .addConverterFactory(GsonConverterFactory.create())
-                                        .build();
-                                AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
-
-                                Log.d("userid", SharePreferenceUtils.getInstance().getString("userid"));
-                                Log.d("pid", pid);
-                                Log.d("quantity", String.valueOf(stepperTouch.getCount()));
-                                Log.d("price", nv1);
-
-                                int versionCode = BuildConfig.VERSION_CODE;
-                                String versionName = BuildConfig.VERSION_NAME;
-
-                                Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), pid, String.valueOf(stepperTouch.getCount()), nv1, versionName);
-
-                                call.enqueue(new Callback<singleProductBean>() {
-                                    @Override
-                                    public void onResponse(Call<singleProductBean> call, Response<singleProductBean> response) {
-
-                                        if (response.body().getStatus().equals("1")) {
-                                            mainActivity.loadCart();
-                                            dialog.dismiss();
-                                        }
-
-                                        Toast.makeText(mainActivity, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
-                                        progressBar.setVisibility(View.GONE);
-
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<singleProductBean> call, Throwable t) {
-                                        progressBar.setVisibility(View.GONE);
-                                    }
-                                });
-
-
-                            }
-                        });
-
-                    } else {
-                        Toast.makeText(mainActivity, "Please login to continue", Toast.LENGTH_SHORT).show();
-                        //Intent intent = new Intent(mainActivity , Login.class);
-                        //startActivity(intent);
-
-                    }
-                }
-
-
-            }
-        });
 
         return view;
     }
@@ -249,6 +157,138 @@ public class SingleProduct extends Fragment {
 
                     stock.setText(item.getStock());
 
+                    add.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+
+                            if (pid.length() > 0) {
+                                String uid = SharePreferenceUtils.getInstance().getString("userId");
+
+                                if (uid.length() > 0) {
+
+                                    final Dialog dialog = new Dialog(mainActivity);
+                                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                    dialog.setCancelable(true);
+                                    dialog.setContentView(R.layout.add_cart_dialog);
+                                    dialog.show();
+
+                                    final StepperTouch stepperTouch = dialog.findViewById(R.id.stepperTouch);
+                                    Button add = dialog.findViewById(R.id.button8);
+                                    final ProgressBar progressBar = dialog.findViewById(R.id.progressBar2);
+                                    final TextView name = dialog.findViewById(R.id.name);
+                                    final TextView size = dialog.findViewById(R.id.size);
+                                    final TextView rate = dialog.findViewById(R.id.rate);
+                                    final TextView discount = dialog.findViewById(R.id.discount);
+                                    final CheckBox toppings = dialog.findViewById(R.id.checkBox);
+                                    final CheckBox sauce = dialog.findViewById(R.id.checkBox2);
+
+                                    name.setText(item.getName());
+                                    size.setText(item.getSize());
+
+                                    if (dis > 0) {
+
+                                        float pri = Float.parseFloat(item.getPrice());
+                                        float dv = (dis / 100) * pri;
+
+                                        float nv = pri - dv;
+
+                                        rate.setText(Html.fromHtml("\u20B9 " + nv));
+                                        discount.setText(Html.fromHtml("<strike>\u20B9 " + item.getPrice() + "</strike>"));
+                                        discount.setVisibility(View.VISIBLE);
+                                    } else {
+
+                                        rate.setText("\u20B9 " + item.getPrice());
+                                        discount.setVisibility(View.GONE);
+                                    }
+
+                                    stepperTouch.setMinValue(1);
+                                    stepperTouch.setMaxValue(99);
+                                    stepperTouch.setSideTapEnabled(true);
+                                    stepperTouch.setCount(1);
+
+                                    add.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                            progressBar.setVisibility(View.VISIBLE);
+
+                                            Bean b = (Bean) mainActivity.getApplicationContext();
+
+
+                                            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+                                            logging.level(HttpLoggingInterceptor.Level.HEADERS);
+                                            logging.level(HttpLoggingInterceptor.Level.BODY);
+
+                                            OkHttpClient client = new OkHttpClient.Builder().writeTimeout(1000, TimeUnit.SECONDS).readTimeout(1000, TimeUnit.SECONDS).connectTimeout(1000, TimeUnit.SECONDS).addInterceptor(logging).build();
+
+                                            Retrofit retrofit = new Retrofit.Builder()
+                                                    .baseUrl(b.baseurl)
+                                                    .client(client)
+                                                    .addConverterFactory(ScalarsConverterFactory.create())
+                                                    .addConverterFactory(GsonConverterFactory.create())
+                                                    .build();
+                                            AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
+
+                                            Log.d("userid", SharePreferenceUtils.getInstance().getString("userid"));
+                                            Log.d("pid", pid);
+                                            Log.d("quantity", String.valueOf(stepperTouch.getCount()));
+                                            Log.d("price", nv1);
+
+                                            int versionCode = BuildConfig.VERSION_CODE;
+                                            String versionName = BuildConfig.VERSION_NAME;
+
+                                            List<String> aons = new ArrayList<>();
+
+                                            if (toppings.isChecked()) {
+                                                aons.add("Extra Toppings");
+                                            }
+
+                                            if (sauce.isChecked()) {
+                                                aons.add("Deep Sauce");
+                                            }
+
+                                            TextUtils.join(",", aons);
+                                            Log.d("addons", TextUtils.join(",", aons));
+
+                                            Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), pid, String.valueOf(stepperTouch.getCount()), nv1, versionName, TextUtils.join(",", aons));
+
+                                            call.enqueue(new Callback<singleProductBean>() {
+                                                @Override
+                                                public void onResponse(Call<singleProductBean> call, Response<singleProductBean> response) {
+
+                                                    if (response.body().getStatus().equals("1")) {
+                                                        mainActivity.loadCart();
+                                                        dialog.dismiss();
+                                                    }
+
+                                                    Toast.makeText(mainActivity, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                                    progressBar.setVisibility(View.GONE);
+
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<singleProductBean> call, Throwable t) {
+                                                    progressBar.setVisibility(View.GONE);
+                                                }
+                                            });
+
+
+                                        }
+                                    });
+
+                                } else {
+                                    Toast.makeText(mainActivity, "Please login to continue", Toast.LENGTH_SHORT).show();
+                                    //Intent intent = new Intent(mainActivity , Login.class);
+                                    //startActivity(intent);
+
+                                }
+                            }
+
+
+                        }
+                    });
 
                 }
 

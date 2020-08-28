@@ -104,7 +104,8 @@ public interface AllApiIneterface {
             @Part("product_id") String product_id,
             @Part("quantity") String quantity,
             @Part("unit_price") String unit_price,
-            @Part("version") String version
+            @Part("version") String version,
+            @Part("addon") String addon
     );
 
     @Multipart
