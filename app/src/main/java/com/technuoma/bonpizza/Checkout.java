@@ -471,31 +471,36 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
                                                 @Override
                                                 public void onResponse(Call<checkoutBean> call, Response<checkoutBean> response) {
 
-                                                    Toast.makeText(Checkout.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                                    if (response.body().getStatus().equals("1")) {
+                                                        Toast.makeText(Checkout.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
+
+                                                        Dialog dialog = new Dialog(Checkout.this, R.style.DialogCustomTheme);
+                                                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                                        dialog.setCancelable(true);
+                                                        dialog.setContentView(R.layout.success_popup);
+                                                        dialog.show();
+
+                                                        TextView oi = dialog.findViewById(R.id.textView57);
+                                                        TextView au = dialog.findViewById(R.id.textView58);
+
+                                                        oi.setText(oid);
+                                                        au.setText("₹ " + gtotal);
+
+                                                        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                                            @Override
+                                                            public void onCancel(DialogInterface dialog) {
+
+                                                                dialog.dismiss();
+                                                                finish();
+
+                                                            }
+                                                        });
+                                                    } else {
+                                                        Toast.makeText(Checkout.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
                                                     progress.setVisibility(View.GONE);
 
-                                                    Dialog dialog = new Dialog(Checkout.this, R.style.DialogCustomTheme);
-                                                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                                    dialog.setCancelable(true);
-                                                    dialog.setContentView(R.layout.success_popup);
-                                                    dialog.show();
-
-                                                    TextView oi = dialog.findViewById(R.id.textView57);
-                                                    TextView au = dialog.findViewById(R.id.textView58);
-
-                                                    oi.setText(oid);
-                                                    au.setText("₹ " + gtotal);
-
-                                                    dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                                        @Override
-                                                        public void onCancel(DialogInterface dialog) {
-
-                                                            dialog.dismiss();
-                                                            finish();
-
-                                                        }
-                                                    });
 
                                                 }
 
