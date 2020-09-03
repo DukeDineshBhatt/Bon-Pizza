@@ -11,7 +11,10 @@ import com.technuoma.bonpizza.ordersPOJO.ordersBean;
 import com.technuoma.bonpizza.productsPOJO.productsBean;
 import com.technuoma.bonpizza.seingleProductPOJO.singleProductBean;
 
+import java.util.List;
+
 import retrofit2.Call;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -148,5 +151,8 @@ public interface AllApiIneterface {
     Call<trackBean> getLogs(
             @Part("order_id") String order_id
     );
+
+    @GET("pizza/api/getAddon.php")
+    Call<List<addonBean>> getAddon();
 
 }

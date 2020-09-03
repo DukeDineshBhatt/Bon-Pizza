@@ -64,6 +64,9 @@ public class Data {
     @SerializedName("stock")
     @Expose
     private String stock;
+    @SerializedName("has_addon")
+    @Expose
+    private String has_addon;
 
     public String getId() {
         return id;
@@ -223,5 +226,13 @@ public class Data {
 
     public void setStock(String stock) {
         this.stock = stock;
+    }
+
+    public String getHas_addon() {
+        return has_addon;
+    }
+
+    public void setHas_addon(String has_addon) {
+        this.has_addon = has_addon;
     }
 }

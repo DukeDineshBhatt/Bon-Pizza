@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.nostra13.universalimageloader.BuildConfig;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.technuoma.bonpizza.seingleProductPOJO.Data;
@@ -180,11 +183,82 @@ public class SingleProduct extends Fragment {
                                     final TextView size = dialog.findViewById(R.id.size);
                                     final TextView rate = dialog.findViewById(R.id.rate);
                                     final TextView discount = dialog.findViewById(R.id.discount);
-                                    final CheckBox toppings = dialog.findViewById(R.id.checkBox);
-                                    final CheckBox sauce = dialog.findViewById(R.id.checkBox2);
+                                    final LinearLayout toppings = dialog.findViewById(R.id.checkBox);
+                                    final TextView addontext = dialog.findViewById(R.id.textView6);
+
+                                    List<String> aons = new ArrayList<>();
+
+                                    if (item.getHas_addon().equals("yes")) {
+                                        toppings.setVisibility(View.VISIBLE);
+                                        addontext.setVisibility(View.VISIBLE);
+                                    } else {
+                                        toppings.setVisibility(View.GONE);
+                                        addontext.setVisibility(View.GONE);
+                                    }
+
 
                                     name.setText(item.getName());
                                     size.setText(item.getSize());
+
+                                    progressBar.setVisibility(View.VISIBLE);
+
+                                    Bean b = (Bean) mainActivity.getApplicationContext();
+
+                                    HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+                                    logging.level(HttpLoggingInterceptor.Level.HEADERS);
+                                    logging.level(HttpLoggingInterceptor.Level.BODY);
+
+                                    OkHttpClient client = new OkHttpClient.Builder().writeTimeout(1000, TimeUnit.SECONDS).readTimeout(1000, TimeUnit.SECONDS).connectTimeout(1000, TimeUnit.SECONDS).addInterceptor(logging).build();
+
+                                    Retrofit retrofit = new Retrofit.Builder()
+                                            .baseUrl(b.baseurl)
+                                            .client(client)
+                                            .addConverterFactory(ScalarsConverterFactory.create())
+                                            .addConverterFactory(GsonConverterFactory.create())
+                                            .build();
+
+                                    AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
+
+                                    Call<List<addonBean>> call2 = cr.getAddon();
+
+                                    call2.enqueue(new Callback<List<addonBean>>() {
+                                        @Override
+                                        public void onResponse(Call<List<addonBean>> call, Response<List<addonBean>> response) {
+
+                                            toppings.removeAllViews();
+
+                                            for (int i = 0; i < response.body().size(); i++) {
+                                                CheckBox checkBox = new CheckBox(mainActivity);
+                                                checkBox.setText(response.body().get(i).getTitle());
+
+                                                int finalI = i;
+                                                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                                    @Override
+                                                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                                                        if (b) {
+                                                            aons.add(response.body().get(finalI).getId());
+                                                        } else {
+                                                            aons.remove(response.body().get(finalI).getId());
+                                                        }
+
+                                                    }
+                                                });
+
+                                                toppings.addView(checkBox);
+
+                                            }
+
+                                            progressBar.setVisibility(View.GONE);
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<List<addonBean>> call, Throwable t) {
+                                            progressBar.setVisibility(View.GONE);
+                                        }
+                                    });
+
 
                                     if (dis > 0) {
 
@@ -231,27 +305,18 @@ public class SingleProduct extends Fragment {
                                             AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
                                             Log.d("userid", SharePreferenceUtils.getInstance().getString("userid"));
-                                            Log.d("pid", pid);
+                                            Log.d("pid", item.getId());
                                             Log.d("quantity", String.valueOf(stepperTouch.getCount()));
                                             Log.d("price", nv1);
 
-                                            int versionCode = BuildConfig.VERSION_CODE;
+                                            int versionCode = com.nostra13.universalimageloader.BuildConfig.VERSION_CODE;
                                             String versionName = BuildConfig.VERSION_NAME;
 
-                                            List<String> aons = new ArrayList<>();
-
-                                            if (toppings.isChecked()) {
-                                                aons.add("Extra Toppings");
-                                            }
-
-                                            if (sauce.isChecked()) {
-                                                aons.add("Deep Sauce");
-                                            }
 
                                             TextUtils.join(",", aons);
                                             Log.d("addons", TextUtils.join(",", aons));
 
-                                            Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), pid, String.valueOf(stepperTouch.getCount()), nv1, versionName, TextUtils.join(", ", aons));
+                                            Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), item.getId(), String.valueOf(stepperTouch.getCount()), nv1, versionName, TextUtils.join(", ", aons));
 
                                             call.enqueue(new Callback<singleProductBean>() {
                                                 @Override
