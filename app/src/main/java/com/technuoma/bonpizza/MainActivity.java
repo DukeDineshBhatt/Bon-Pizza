@@ -108,7 +108,8 @@ public class MainActivity extends AppCompatActivity implements ResultCallback<Lo
 
         toolbar.setTitle("Bon Pizza");
         toolbar.setTitleTextColor(Color.WHITE);
-
+        toolbar.setSubtitle("Your Location");
+        toolbar.setSubtitleTextColor(Color.WHITE);
 
         //banner.setAdapter(adapter4);
         //banner.setLayoutManager(manager3);

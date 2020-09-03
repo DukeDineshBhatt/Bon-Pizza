@@ -143,4 +143,10 @@ public interface AllApiIneterface {
             @Part("order_id") String order_id
     );
 
+    @Multipart
+    @POST("pizza/api/getLogs.php")
+    Call<trackBean> getLogs(
+            @Part("order_id") String order_id
+    );
+
 }

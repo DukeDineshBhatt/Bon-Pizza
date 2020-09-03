@@ -225,6 +225,7 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
             }
         });
 
+        pin.setText(SharePreferenceUtils.getInstance().getString("pin"));
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
