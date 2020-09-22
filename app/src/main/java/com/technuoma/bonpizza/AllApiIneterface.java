@@ -156,4 +156,11 @@ public interface AllApiIneterface {
     @GET("pizza/api/getAddon.php")
     Call<List<addOnBean>> getAddon();
 
+    @Multipart
+    @POST("pizza/api/getOrderId.php")
+    Call<payBean> getOrderId(
+            @Part("amount") String amount,
+            @Part("receipt") String receipt
+    );
+
 }
