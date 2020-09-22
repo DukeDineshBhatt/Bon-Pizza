@@ -92,8 +92,8 @@ public class OrderDetails extends AppCompatActivity {
             }
         });
 
-        adapter = new CategoryAdapter(this , list);
-        GridLayoutManager manager = new GridLayoutManager(this , 1);
+        adapter = new CategoryAdapter(this, list);
+        GridLayoutManager manager = new GridLayoutManager(this, 1);
 
         grid.setAdapter(adapter);
         grid.setLayoutManager(manager);
@@ -129,8 +129,7 @@ public class OrderDetails extends AppCompatActivity {
             public void onResponse(Call<orderDetailsBean> call, Response<orderDetailsBean> response) {
 
 
-                if (response.body().getStatus().equals("1"))
-                {
+                if (response.body().getStatus().equals("1")) {
                     adapter.setData(response.body().getData());
                 }
 
@@ -147,20 +146,17 @@ public class OrderDetails extends AppCompatActivity {
 
     }
 
-    class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder>
-    {
+    class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
         Context context;
         List<Datum> list = new ArrayList<>();
 
-        public CategoryAdapter(Context context , List<Datum> list)
-        {
+        public CategoryAdapter(Context context, List<Datum> list) {
             this.context = context;
             this.list = list;
         }
 
-        public void setData(List<Datum> list)
-        {
+        public void setData(List<Datum> list) {
             this.list = list;
             notifyDataSetChanged();
         }
@@ -168,8 +164,8 @@ public class OrderDetails extends AppCompatActivity {
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.category_list_model , parent , false);
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.category_list_model, parent, false);
             return new ViewHolder(view);
         }
 
@@ -181,13 +177,20 @@ public class OrderDetails extends AppCompatActivity {
 
             DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).resetViewBeforeLoading(false).build();
             ImageLoader loader = ImageLoader.getInstance();
-            loader.displayImage(item.getImage() , holder.image , options);
+            loader.displayImage(item.getImage(), holder.image, options);
 
             holder.quantity.setText("Quantity - " + item.getQuantity());
             holder.title.setText(item.getName());
-            holder.price.setText("Price - ₹ " + item.getPrice());
-            holder.addon.setText("Add on: " + item.getAddon());
+            holder.price.setText("₹ " + item.getPrice());
+            String[] addons = item.getAddon().split(", ");
 
+            StringBuilder ao = new StringBuilder();
+
+            for (int i = 0; i < addons.length; i++) {
+                ao.append("\n").append(addons[i]);
+            }
+
+            holder.addon.setText("Add on: " + ao);
 
 
         }
@@ -197,11 +200,10 @@ public class OrderDetails extends AppCompatActivity {
             return list.size();
         }
 
-        class ViewHolder extends RecyclerView.ViewHolder
-        {
+        class ViewHolder extends RecyclerView.ViewHolder {
 
             ImageView image;
-            TextView quantity, title , price, addon;
+            TextView quantity, title, price, addon;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
