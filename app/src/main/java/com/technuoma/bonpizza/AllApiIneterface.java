@@ -1,6 +1,7 @@
 package com.technuoma.bonpizza;
 
 
+import com.technuoma.bonpizza.addOnPOJO.addOnBean;
 import com.technuoma.bonpizza.addressPOJO.addressBean;
 import com.technuoma.bonpizza.cartPOJO.cartBean;
 import com.technuoma.bonpizza.checkPromoPOJO.checkPromoBean;
@@ -153,6 +154,6 @@ public interface AllApiIneterface {
     );
 
     @GET("pizza/api/getAddon.php")
-    Call<List<addonBean>> getAddon();
+    Call<List<addOnBean>> getAddon();
 
 }

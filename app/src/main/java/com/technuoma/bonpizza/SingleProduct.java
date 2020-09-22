@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 import com.nostra13.universalimageloader.BuildConfig;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.technuoma.bonpizza.addOnPOJO.addOnBean;
 import com.technuoma.bonpizza.seingleProductPOJO.Data;
 import com.technuoma.bonpizza.seingleProductPOJO.singleProductBean;
 
@@ -219,15 +220,15 @@ public class SingleProduct extends Fragment {
 
                                     AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-                                    Call<List<addonBean>> call2 = cr.getAddon();
+                                    Call<List<addOnBean>> call2 = cr.getAddon();
 
-                                    call2.enqueue(new Callback<List<addonBean>>() {
+                                    call2.enqueue(new Callback<List<addOnBean>>() {
                                         @Override
-                                        public void onResponse(Call<List<addonBean>> call, Response<List<addonBean>> response) {
+                                        public void onResponse(Call<List<addOnBean>> call, Response<List<addOnBean>> response) {
 
                                             toppings.removeAllViews();
 
-                                            for (int i = 0; i < response.body().size(); i++) {
+                                            /*for (int i = 0; i < response.body().size(); i++) {
                                                 CheckBox checkBox = new CheckBox(mainActivity);
                                                 checkBox.setText(response.body().get(i).getTitle());
 
@@ -247,14 +248,14 @@ public class SingleProduct extends Fragment {
 
                                                 toppings.addView(checkBox);
 
-                                            }
+                                            }*/
 
                                             progressBar.setVisibility(View.GONE);
 
                                         }
 
                                         @Override
-                                        public void onFailure(Call<List<addonBean>> call, Throwable t) {
+                                        public void onFailure(Call<List<addOnBean>> call, Throwable t) {
                                             progressBar.setVisibility(View.GONE);
                                         }
                                     });

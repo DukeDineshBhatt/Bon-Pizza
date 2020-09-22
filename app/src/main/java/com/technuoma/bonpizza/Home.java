@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -37,7 +38,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -54,6 +54,7 @@ import com.nostra13.universalimageloader.BuildConfig;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.santalu.autoviewpager.AutoViewPager;
+import com.technuoma.bonpizza.addOnPOJO.addOnBean;
 import com.technuoma.bonpizza.homePOJO.Banners;
 import com.technuoma.bonpizza.homePOJO.Best;
 import com.technuoma.bonpizza.homePOJO.Cat;
@@ -68,6 +69,8 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import io.apptik.widget.multiselectspinner.BaseMultiSelectSpinner;
+import io.apptik.widget.multiselectspinner.MultiSelectSpinner;
 import me.relex.circleindicator.CircleIndicator;
 import nl.dionsegijn.steppertouch.StepperTouch;
 import okhttp3.OkHttpClient;
@@ -476,33 +479,57 @@ public class Home extends Fragment {
 
                         AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-                        Call<List<addonBean>> call2 = cr.getAddon();
+                        Call<List<addOnBean>> call2 = cr.getAddon();
 
-                        call2.enqueue(new Callback<List<addonBean>>() {
+                        call2.enqueue(new Callback<List<addOnBean>>() {
                             @Override
-                            public void onResponse(Call<List<addonBean>> call, Response<List<addonBean>> response) {
+                            public void onResponse(Call<List<addOnBean>> call, Response<List<addOnBean>> response) {
 
                                 toppings.removeAllViews();
 
                                 for (int i = 0; i < response.body().size(); i++) {
-                                    CheckBox checkBox = new CheckBox(context);
-                                    checkBox.setText(response.body().get(i).getTitle());
 
-                                    int finalI = i;
-                                    checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                    View addonmodel = inflater.inflate(R.layout.addon_model, null);
+                                    TextView ty = addonmodel.findViewById(R.id.textView8);
+                                    MultiSelectSpinner spinner = addonmodel.findViewById(R.id.spinner3);
+
+                                    ty.setText(response.body().get(i).getType());
+
+                                    List<String> nm = new ArrayList<>();
+                                    List<String> pr = new ArrayList<>();
+
+                                    for (int j = 0; j < response.body().get(i).getData().size(); j++) {
+
+                                        nm.add(response.body().get(i).getData().get(j).getTitle());
+                                        if (item.getSize().equals("Regular")) {
+                                            pr.add(response.body().get(i).getData().get(j).getPriceRegular());
+                                        } else if (item.getSize().equals("Couple")) {
+                                            pr.add(response.body().get(i).getData().get(j).getPriceCouple());
+                                        } else {
+                                            pr.add(response.body().get(i).getData().get(j).getPriceFamily());
+                                        }
+
+                                    }
+
+                                    ArrayAdapter<String> adapter = new ArrayAdapter <String>(context, android.R.layout.simple_list_item_multiple_choice, nm);
+
+                                    spinner.setListAdapter(adapter);
+
+                                    spinner.setListener(new BaseMultiSelectSpinner.MultiSpinnerListener() {
                                         @Override
-                                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                                        public void onItemsSelected(boolean[] selected) {
 
-                                            if (b) {
-                                                aons.add(response.body().get(finalI).getId());
-                                            } else {
-                                                aons.remove(response.body().get(finalI).getId());
+                                            for (int i = 0 ; i < selected.length ; i++){
+
+                                                Log.e("chosenItems", String.valueOf(selected[i]));
                                             }
 
                                         }
                                     });
 
-                                    toppings.addView(checkBox);
+                                    spinner.setSelectAll(true);
+
+                                    toppings.addView(addonmodel);
 
                                 }
 
@@ -511,7 +538,7 @@ public class Home extends Fragment {
                             }
 
                             @Override
-                            public void onFailure(Call<List<addonBean>> call, Throwable t) {
+                            public void onFailure(Call<List<addOnBean>> call, Throwable t) {
                                 progressBar.setVisibility(View.GONE);
                             }
                         });
