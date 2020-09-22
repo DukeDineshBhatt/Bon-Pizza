@@ -38,6 +38,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.abdeveloper.library.MultiSelectDialog;
+import com.abdeveloper.library.MultiSelectModel;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -69,8 +72,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import io.apptik.widget.multiselectspinner.BaseMultiSelectSpinner;
-import io.apptik.widget.multiselectspinner.MultiSelectSpinner;
 import me.relex.circleindicator.CircleIndicator;
 import nl.dionsegijn.steppertouch.StepperTouch;
 import okhttp3.OkHttpClient;
@@ -491,43 +492,74 @@ public class Home extends Fragment {
 
                                     View addonmodel = inflater.inflate(R.layout.addon_model, null);
                                     TextView ty = addonmodel.findViewById(R.id.textView8);
-                                    MultiSelectSpinner spinner = addonmodel.findViewById(R.id.spinner3);
+                                    TextView spinner = addonmodel.findViewById(R.id.spinner3);
 
                                     ty.setText(response.body().get(i).getType());
 
-                                    List<String> nm = new ArrayList<>();
-                                    List<String> pr = new ArrayList<>();
+                                    ArrayList<MultiSelectModel> nm = new ArrayList<>();
+                                    ArrayList<String> pr = new ArrayList<>();
 
                                     for (int j = 0; j < response.body().get(i).getData().size(); j++) {
 
-                                        nm.add(response.body().get(i).getData().get(j).getTitle());
+                                        int iidd = Integer.parseInt(response.body().get(i).getData().get(j).getId());
+
+                                        String title = "";
+
                                         if (item.getSize().equals("Regular")) {
+                                            title = response.body().get(i).getData().get(j).getTitle() + " ( ₹ " + response.body().get(i).getData().get(j).getPriceRegular() + ")";
                                             pr.add(response.body().get(i).getData().get(j).getPriceRegular());
                                         } else if (item.getSize().equals("Couple")) {
+                                            title = response.body().get(i).getData().get(j).getTitle() + " ( ₹ " + response.body().get(i).getData().get(j).getPriceCouple() + ")";
                                             pr.add(response.body().get(i).getData().get(j).getPriceCouple());
                                         } else {
+                                            title = response.body().get(i).getData().get(j).getTitle() + " ( ₹ " + response.body().get(i).getData().get(j).getPriceFamily() + ")";
                                             pr.add(response.body().get(i).getData().get(j).getPriceFamily());
                                         }
 
+                                        MultiSelectModel model = new MultiSelectModel(iidd, title);
+
+                                        //nm.add(response.body().get(i).getData().get(j).getTitle());
+                                        nm.add(model);
+
                                     }
 
-                                    ArrayAdapter<String> adapter = new ArrayAdapter <String>(context, android.R.layout.simple_list_item_multiple_choice, nm);
+                                    //ArrayAdapter<String> adapter = new ArrayAdapter <String>(context, android.R.layout.simple_list_item_multiple_choice, nm);
 
-                                    spinner.setListAdapter(adapter);
-
-                                    spinner.setListener(new BaseMultiSelectSpinner.MultiSpinnerListener() {
+                                    spinner.setOnClickListener(new View.OnClickListener() {
                                         @Override
-                                        public void onItemsSelected(boolean[] selected) {
+                                        public void onClick(View v) {
 
-                                            for (int i = 0 ; i < selected.length ; i++){
+                                            MultiSelectDialog multiSelectDialog = new MultiSelectDialog()
+                                                    .title("Addon") //setting title for dialog
+                                                    .titleSize(25)
+                                                    .positiveText("Done")
+                                                    .negativeText("Cancel")
+                                                    .setMinSelectionLimit(1) //you can set minimum checkbox selection limit (Optional)
+                                                    .multiSelectList(nm) // the multi select model list with ids and name
+                                                    .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
+                                                        @Override
+                                                        public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
+                                                            //will return list of selected IDS
 
-                                                Log.e("chosenItems", String.valueOf(selected[i]));
-                                            }
+                                                            Log.d("datastring", dataString);
+                                                            //aons.addAll(selectedIds);
+                                                            spinner.setText(TextUtils.join(", ", selectedNames));
+
+
+                                                        }
+
+                                                        @Override
+                                                        public void onCancel() {
+                                                            Log.d(TAG, "Dialog cancelled");
+                                                        }
+
+
+                                                    });
+
+                                            multiSelectDialog.show(getChildFragmentManager(), "multiSelectDialog");
 
                                         }
                                     });
-
-                                    spinner.setSelectAll(true);
 
                                     toppings.addView(addonmodel);
 
