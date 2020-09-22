@@ -23,6 +23,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.abdeveloper.library.MultiSelectDialog;
+import com.abdeveloper.library.MultiSelectModel;
 import com.nostra13.universalimageloader.BuildConfig;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -31,6 +33,7 @@ import com.technuoma.bonpizza.seingleProductPOJO.Data;
 import com.technuoma.bonpizza.seingleProductPOJO.singleProductBean;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -58,11 +61,15 @@ public class SingleProduct extends Fragment {
     String pid, nv1;
 
     MainActivity mainActivity;
+    LayoutInflater inflater;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_single_product, container, false);
+
+        this.inflater = inflater;
+
         mainActivity = (MainActivity) getActivity();
         id = getArguments().getString("id");
         name = getArguments().getString("title");
@@ -187,7 +194,7 @@ public class SingleProduct extends Fragment {
                                     final LinearLayout toppings = dialog.findViewById(R.id.checkBox);
                                     final TextView addontext = dialog.findViewById(R.id.textView6);
 
-                                    List<String> aons = new ArrayList<>();
+                                    List<Integer> aons = new ArrayList<>();
 
                                     if (item.getHas_addon().equals("yes")) {
                                         toppings.setVisibility(View.VISIBLE);
@@ -228,27 +235,89 @@ public class SingleProduct extends Fragment {
 
                                             toppings.removeAllViews();
 
-                                            /*for (int i = 0; i < response.body().size(); i++) {
-                                                CheckBox checkBox = new CheckBox(mainActivity);
-                                                checkBox.setText(response.body().get(i).getTitle());
+                                            for (int i = 0; i < response.body().size(); i++) {
 
-                                                int finalI = i;
-                                                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                                View addonmodel = inflater.inflate(R.layout.addon_model, null);
+                                                TextView ty = addonmodel.findViewById(R.id.textView8);
+                                                TextView spinner = addonmodel.findViewById(R.id.spinner3);
+
+                                                ty.setText("Addons");
+
+                                                ArrayList<MultiSelectModel> nm = new ArrayList<>();
+                                                ArrayList<String> pr = new ArrayList<>();
+
+
+                                                for (int j = 0; j < response.body().get(i).getData().size(); j++) {
+
+                                                    int iidd = Integer.parseInt(response.body().get(i).getData().get(j).getId());
+
+                                                    String title = "";
+
+                                                    if (item.getSize().equals("Regular")) {
+                                                        title = response.body().get(i).getData().get(j).getType() + " - " + response.body().get(i).getData().get(j).getTitle() + " ( ₹ " + response.body().get(i).getData().get(j).getPriceRegular() + ")";
+                                                        pr.add(response.body().get(i).getData().get(j).getPriceRegular());
+                                                    } else if (item.getSize().equals("Couple")) {
+                                                        title = response.body().get(i).getData().get(j).getType() + " - " + response.body().get(i).getData().get(j).getTitle() + " ( ₹ " + response.body().get(i).getData().get(j).getPriceCouple() + ")";
+                                                        pr.add(response.body().get(i).getData().get(j).getPriceCouple());
+                                                    } else {
+                                                        title = response.body().get(i).getData().get(j).getType() + " - " + response.body().get(i).getData().get(j).getTitle() + " ( ₹ " + response.body().get(i).getData().get(j).getPriceFamily() + ")";
+                                                        pr.add(response.body().get(i).getData().get(j).getPriceFamily());
+                                                    }
+
+                                                    MultiSelectModel model = new MultiSelectModel(iidd, title);
+
+                                                    //nm.add(response.body().get(i).getData().get(j).getTitle());
+                                                    nm.add(model);
+
+                                                }
+
+                                                //ArrayAdapter<String> adapter = new ArrayAdapter <String>(context, android.R.layout.simple_list_item_multiple_choice, nm);
+
+                                                spinner.setOnClickListener(new View.OnClickListener() {
                                                     @Override
-                                                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                                                    public void onClick(View v) {
 
-                                                        if (b) {
-                                                            aons.add(response.body().get(finalI).getId());
-                                                        } else {
-                                                            aons.remove(response.body().get(finalI).getId());
-                                                        }
+                                                        ArrayList<Integer> sel = new ArrayList<>();
+
+                                                        MultiSelectDialog multiSelectDialog = new MultiSelectDialog()
+                                                                .title("Addon") //setting title for dialog
+                                                                .titleSize(25)
+                                                                .positiveText("Done")
+                                                                .negativeText("Cancel")
+                                                                .preSelectIDsList(sel)
+                                                                .setMinSelectionLimit(1) //you can set minimum checkbox selection limit (Optional)
+                                                                .multiSelectList(nm) // the multi select model list with ids and name
+                                                                .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
+                                                                    @Override
+                                                                    public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
+                                                                        //will return list of selected IDS
+                                                                        sel.addAll(selectedIds);
+
+                                                                        aons.clear();
+
+                                                                        Log.d("datastring", TextUtils.join(", ", selectedIds));
+                                                                        aons.addAll(selectedIds);
+                                                                        spinner.setText(TextUtils.join(", ", selectedNames));
+
+
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onCancel() {
+                                                                        Log.d("adasd", "Dialog cancelled");
+                                                                    }
+
+
+                                                                });
+
+                                                        multiSelectDialog.show(getChildFragmentManager(), "multiSelectDialog");
 
                                                     }
                                                 });
 
-                                                toppings.addView(checkBox);
+                                                toppings.addView(addonmodel);
 
-                                            }*/
+                                            }
 
                                             progressBar.setVisibility(View.GONE);
 
@@ -314,10 +383,15 @@ public class SingleProduct extends Fragment {
                                             String versionName = BuildConfig.VERSION_NAME;
 
 
-                                            TextUtils.join(",", aons);
-                                            Log.d("addons", TextUtils.join(",", aons));
+                                            ArrayList<Integer> values = new ArrayList<>();
+                                            HashSet<Integer> hashSet = new HashSet<>(aons);
+                                            values.clear();
+                                            values.addAll(hashSet);
 
-                                            Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), item.getId(), String.valueOf(stepperTouch.getCount()), nv1, versionName, TextUtils.join(", ", aons));
+                                            TextUtils.join(",", values);
+                                            Log.d("addons", TextUtils.join(",", values));
+
+                                            Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), item.getId(), String.valueOf(stepperTouch.getCount()), nv1, versionName, TextUtils.join(", ", values));
 
                                             call.enqueue(new Callback<singleProductBean>() {
                                                 @Override
