@@ -67,6 +67,7 @@ import com.technuoma.bonpizza.seingleProductPOJO.singleProductBean;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -447,7 +448,7 @@ public class Home extends Fragment {
                         final LinearLayout toppings = dialog.findViewById(R.id.checkBox);
                         final TextView addontext = dialog.findViewById(R.id.textView6);
 
-                        List<String> aons = new ArrayList<>();
+                        List<Integer> aons = new ArrayList<>();
 
                         if (item.getHas_addon().equals("yes")) {
                             toppings.setVisibility(View.VISIBLE);
@@ -494,10 +495,11 @@ public class Home extends Fragment {
                                     TextView ty = addonmodel.findViewById(R.id.textView8);
                                     TextView spinner = addonmodel.findViewById(R.id.spinner3);
 
-                                    ty.setText(response.body().get(i).getType());
+                                    ty.setText("Addons");
 
                                     ArrayList<MultiSelectModel> nm = new ArrayList<>();
                                     ArrayList<String> pr = new ArrayList<>();
+
 
                                     for (int j = 0; j < response.body().get(i).getData().size(); j++) {
 
@@ -506,13 +508,13 @@ public class Home extends Fragment {
                                         String title = "";
 
                                         if (item.getSize().equals("Regular")) {
-                                            title = response.body().get(i).getData().get(j).getTitle() + " ( ₹ " + response.body().get(i).getData().get(j).getPriceRegular() + ")";
+                                            title = response.body().get(i).getData().get(j).getType() + " - " + response.body().get(i).getData().get(j).getTitle() + " ( ₹ " + response.body().get(i).getData().get(j).getPriceRegular() + ")";
                                             pr.add(response.body().get(i).getData().get(j).getPriceRegular());
                                         } else if (item.getSize().equals("Couple")) {
-                                            title = response.body().get(i).getData().get(j).getTitle() + " ( ₹ " + response.body().get(i).getData().get(j).getPriceCouple() + ")";
+                                            title = response.body().get(i).getData().get(j).getType() + " - " + response.body().get(i).getData().get(j).getTitle() + " ( ₹ " + response.body().get(i).getData().get(j).getPriceCouple() + ")";
                                             pr.add(response.body().get(i).getData().get(j).getPriceCouple());
                                         } else {
-                                            title = response.body().get(i).getData().get(j).getTitle() + " ( ₹ " + response.body().get(i).getData().get(j).getPriceFamily() + ")";
+                                            title = response.body().get(i).getData().get(j).getType() + " - " + response.body().get(i).getData().get(j).getTitle() + " ( ₹ " + response.body().get(i).getData().get(j).getPriceFamily() + ")";
                                             pr.add(response.body().get(i).getData().get(j).getPriceFamily());
                                         }
 
@@ -529,20 +531,26 @@ public class Home extends Fragment {
                                         @Override
                                         public void onClick(View v) {
 
+                                            ArrayList<Integer> sel = new ArrayList<>();
+
                                             MultiSelectDialog multiSelectDialog = new MultiSelectDialog()
                                                     .title("Addon") //setting title for dialog
                                                     .titleSize(25)
                                                     .positiveText("Done")
                                                     .negativeText("Cancel")
+                                                    .preSelectIDsList(sel)
                                                     .setMinSelectionLimit(1) //you can set minimum checkbox selection limit (Optional)
                                                     .multiSelectList(nm) // the multi select model list with ids and name
                                                     .onSubmit(new MultiSelectDialog.SubmitCallbackListener() {
                                                         @Override
                                                         public void onSelected(ArrayList<Integer> selectedIds, ArrayList<String> selectedNames, String dataString) {
                                                             //will return list of selected IDS
+                                                            sel.addAll(selectedIds);
 
-                                                            Log.d("datastring", dataString);
-                                                            //aons.addAll(selectedIds);
+                                                            aons.clear();
+
+                                                            Log.d("datastring", TextUtils.join(", ", selectedIds));
+                                                            aons.addAll(selectedIds);
                                                             spinner.setText(TextUtils.join(", ", selectedNames));
 
 
@@ -628,11 +636,15 @@ public class Home extends Fragment {
                                 int versionCode = com.nostra13.universalimageloader.BuildConfig.VERSION_CODE;
                                 String versionName = BuildConfig.VERSION_NAME;
 
+                                ArrayList<Integer> values = new ArrayList<>();
+                                HashSet<Integer> hashSet = new HashSet<>(aons);
+                                values.clear();
+                                values.addAll(hashSet);
 
-                                TextUtils.join(",", aons);
-                                Log.d("addons", TextUtils.join(",", aons));
+                                TextUtils.join(",", values);
+                                Log.d("addons", TextUtils.join(",", values));
 
-                                Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), item.getId(), String.valueOf(stepperTouch.getCount()), nv1, versionName, TextUtils.join(", ", aons));
+                                Call<singleProductBean> call = cr.addCart(SharePreferenceUtils.getInstance().getString("userId"), item.getId(), String.valueOf(stepperTouch.getCount()), nv1, versionName, TextUtils.join(", ", values));
 
                                 call.enqueue(new Callback<singleProductBean>() {
                                     @Override

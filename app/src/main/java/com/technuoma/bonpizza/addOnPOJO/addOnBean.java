@@ -6,30 +6,30 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class addOnBean {
-    @SerializedName("id")
+    @SerializedName("status")
     @Expose
-    private String id;
-    @SerializedName("type")
+    private String status;
+    @SerializedName("message")
     @Expose
-    private String type;
+    private String message;
     @SerializedName("data")
     @Expose
     private List<Datum> data = null;
 
-    public String getId() {
-        return id;
+    public String getStatus() {
+        return status;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getType() {
-        return type;
+    public String getMessage() {
+        return message;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public List<Datum> getData() {

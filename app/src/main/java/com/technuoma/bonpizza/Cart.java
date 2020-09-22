@@ -245,7 +245,17 @@ public class Cart extends Fragment {
 
 
             viewHolder.title.setText(item.getName());
-            viewHolder.brand.setText("Add on: " + item.getAddon());
+
+            String[] addons = item.getAddon().split(", ");
+
+            StringBuilder ao = new StringBuilder();
+
+            for (int i = 0 ; i < addons.length ; i++)
+            {
+                ao.append("\n").append(addons[i]);
+            }
+
+            viewHolder.brand.setText("Add on: " + ao);
 
 
             viewHolder.quantity.setText(item.getQuantity());

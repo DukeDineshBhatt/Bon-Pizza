@@ -70,4 +70,5 @@ public class Datum {
     public void setPriceFamily(String priceFamily) {
         this.priceFamily = priceFamily;
     }
+
 }
