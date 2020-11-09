@@ -21,13 +21,20 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".MapsActivity"></activity>
-        <activity android:name=".OrderDetails" />
-        <activity android:name=".Checkout" />
-        <activity android:name=".Address" />
-        <activity android:name=".Web" />
-        <activity android:name=".OTP" />
-        <activity android:name=".Login" />
+        <activity android:name=".MapsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".OrderDetails"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Checkout"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Address"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Web"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".OTP"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Login"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
