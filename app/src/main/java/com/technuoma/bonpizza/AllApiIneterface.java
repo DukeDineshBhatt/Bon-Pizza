@@ -41,7 +41,8 @@ public interface AllApiIneterface {
     @POST("pizza/api/getHome2.php")
     Call<homeBean> getHome(
             @Part("lat") String lat,
-            @Part("lng") String lng
+            @Part("lng") String lng,
+            @Part("pin") String pin
     );
 
     @Multipart

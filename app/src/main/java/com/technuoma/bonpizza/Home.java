@@ -186,7 +186,7 @@ public class Home extends Fragment {
 
         AllApiIneterface cr = retrofit.create(AllApiIneterface.class);
 
-        Call<homeBean> call = cr.getHome(SharePreferenceUtils.getInstance().getString("lat"), SharePreferenceUtils.getInstance().getString("lng"));
+        Call<homeBean> call = cr.getHome(SharePreferenceUtils.getInstance().getString("lat"), SharePreferenceUtils.getInstance().getString("lng"), SharePreferenceUtils.getInstance().getString("pin"));
         call.enqueue(new Callback<homeBean>() {
             @Override
             public void onResponse(Call<homeBean> call, Response<homeBean> response) {
