@@ -355,25 +355,50 @@ public class Checkout extends AppCompatActivity implements DatePickerDialog.OnDa
                             if (response.body().getStatus().equals("1")) {
 
                                 float amt = Float.parseFloat(amm);
-                                float dis = Float.parseFloat(response.body().getData().getDiscount());
+                                String typ = response.body().getData().getType();
+                                if (typ.equals("Percentage"))
+                                {
+                                    float dis = Float.parseFloat(response.body().getData().getDiscount());
 
-                                float da = (dis / 100) * amt;
+                                    float da = (dis / 100) * amt;
 
-                                float na = amt - da;
+                                    float na = amt - da;
 
-                                amm = String.valueOf(na);
+                                    amm = String.valueOf(na);
 
-                                amount.setText("₹ " + amm);
+                                    amount.setText("₹ " + amm);
 
-                                float gt = Float.parseFloat(amm) + 0;
+                                    float gt = Float.parseFloat(amm) + 0;
 
-                                grand.setText("₹ " + gt);
+                                    grand.setText("₹ " + gt);
 
-                                gtotal = String.valueOf(gt);
+                                    gtotal = String.valueOf(gt);
 
-                                pid = response.body().getData().getPid();
+                                    pid = response.body().getData().getPid();
 
-                                Toast.makeText(Checkout.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Checkout.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                                else
+                                {
+                                    float dis = Float.parseFloat(response.body().getData().getDiscount());
+
+                                    float na = amt - dis;
+
+                                    amm = String.valueOf(na);
+
+                                    amount.setText("₹ " + amm);
+
+                                    float gt = Float.parseFloat(amm) + 0;
+
+                                    grand.setText("₹ " + gt);
+
+                                    gtotal = String.valueOf(gt);
+
+                                    pid = response.body().getData().getPid();
+
+                                    Toast.makeText(Checkout.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
 
                             } else {
                                 Toast.makeText(Checkout.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();

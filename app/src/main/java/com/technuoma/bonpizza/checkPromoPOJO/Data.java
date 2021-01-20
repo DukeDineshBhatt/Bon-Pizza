@@ -10,6 +10,9 @@ public class Data {
     @SerializedName("pid")
     @Expose
     private String pid;
+    @SerializedName("type")
+    @Expose
+    private String type;
 
     public String getDiscount() {
         return discount;
@@ -25,5 +28,13 @@ public class Data {
 
     public void setPid(String pid) {
         this.pid = pid;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
